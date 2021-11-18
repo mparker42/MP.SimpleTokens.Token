@@ -7,10 +7,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using MP.DocumentDB;
 using MP.SimpleTokens.Token.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace MP.SimpleTokens.Token
@@ -28,14 +30,21 @@ namespace MP.SimpleTokens.Token
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services
+                .AddControllers()
+                .AddJsonOptions(x =>
+                    {
+                        x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                    }
+                );
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MP.SimpleTokens.Token", Version = "v1" });
             });
             services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
 
-            services.Configure<MongoSettings>(Configuration.GetSection("Mongo"));
+            services.AddCollection<TokenInfo>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
