@@ -8,7 +8,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using MP.DocumentDB;
-using MP.SimpleTokens.Token.Models;
+using MP.SimpleTokens.Common.Ethereum;
+using MP.SimpleTokens.Common.Models.Tokens;
+using MP.SimpleTokens.Identity.Clients;
+using Refit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,13 +41,19 @@ namespace MP.SimpleTokens.Token
                     }
                 );
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MP.SimpleTokens.Token", Version = "v1" });
-            });
-            services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
+            services
+                .AddSwaggerGen(c =>
+                {
+                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "MP.SimpleTokens.Token", Version = "v1" });
+                })
+                .AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_CONNECTIONSTRING"])
+                .AddEthereum(Configuration)
+                .AddCollection<TokenInfo>(Configuration)
+                .AddHttpClient();
 
-            services.AddCollection<TokenInfo>(Configuration);
+            services
+                .AddRefitClient<ITokenClient>()
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri(Configuration["ApiClients:Identity"])); ;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,19 +64,16 @@ namespace MP.SimpleTokens.Token
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MP.SimpleTokens.Token v1"));
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app
+                .UseSwagger()
+                .UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MP.SimpleTokens.Token v1"))
+                .UseHttpsRedirection()
+                .UseRouting()
+                .UseAuthorization()
+                .UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllers();
+                });
         }
     }
 }

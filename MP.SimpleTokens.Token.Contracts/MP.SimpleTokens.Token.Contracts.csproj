@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Authors>mparker42</Authors>
+    <Description>Public model classes for the MP.SimpleTokens.Token API.</Description>
+    <PackageProjectUrl>https://github.com/mparker42/MP.SimpleTokens.Token.Contracts</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mparker42/MP.SimpleTokens.Token.Contracts</RepositoryUrl>
+    <PackageLicenseExpression>MIT-0</PackageLicenseExpression>
+    <Copyright>Martin Parker</Copyright>
+    <Version>1.0.1</Version>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MP.SimpleTokens.Common.Models" Version="1.0.6" />
+  </ItemGroup>
+
+</Project>

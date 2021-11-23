@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Authors>mparker42</Authors>
+    <Description>Refit client for the MP.SimpleTokens.Token API.</Description>
+    <PackageProjectUrl>https://github.com/mparker42/MP.SimpleTokens.Token.Clients</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mparker42/MP.SimpleTokens.Token.Clients</RepositoryUrl>
+    <PackageLicenseExpression>MIT-0</PackageLicenseExpression>
+    <Copyright>Martin Parker</Copyright>
+    <Version>1.0.1</Version>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Refit" Version="6.1.15" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MP.SimpleTokens.Token.Contracts\MP.SimpleTokens.Token.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>
