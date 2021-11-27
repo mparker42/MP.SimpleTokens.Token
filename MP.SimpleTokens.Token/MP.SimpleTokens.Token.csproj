@@ -11,10 +11,9 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.19.0" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
-		<PackageReference Include="MongoDB.Driver" Version="2.13.2" />
-		<PackageReference Include="MP.DocumentDB" Version="1.0.5" />
+		<PackageReference Include="MP.DocumentDB" Version="1.0.6" />
 		<PackageReference Include="MP.SimpleTokens.Common.Ethereum" Version="1.0.4" />
-		<PackageReference Include="MP.SimpleTokens.Identity.Clients" Version="1.0.2" />
+		<PackageReference Include="MP.SimpleTokens.Identity.Clients" Version="1.0.6" />
 		<PackageReference Include="Refit.HttpClientFactory" Version="6.1.15" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
 		<PackageReference Include="System.Text.Json" Version="6.0.0" />

@@ -86,8 +86,16 @@ namespace MP.SimpleTokens.Token.Controllers
                             TokenTransactions = transactions.Select(t =>
                                 new PublicTokenTransaction
                                 {
-                                    To = tokenIdentities[t.Event.To].Name,
-                                    From = tokenIdentities[t.Event.From].Name
+                                    To = new PublicTokenIdentity
+                                    {
+                                        Name = tokenIdentities[t.Event.To].Name,
+                                        IsVerified = tokenIdentities[t.Event.To].IsVerified
+                                    },
+                                    From = new PublicTokenIdentity
+                                    {
+                                        Name = tokenIdentities[t.Event.From].Name,
+                                        IsVerified = tokenIdentities[t.Event.From].IsVerified
+                                    }
                                 }
                             )
                         }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MP.SimpleTokens.Token.Contracts
 {
-    public class PublicTokenTransaction
+    public class PublicTokenIdentity
     {
-        public PublicTokenIdentity? To { get; set; }
-        public PublicTokenIdentity? From { get; set; }
+        public bool IsVerified { get; set; }
+        public string? Name { get; set; }
     }
 }
